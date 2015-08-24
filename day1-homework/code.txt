@@ -1,0 +1,6 @@
+fastqc SRR072893.fastq
+hisat -p 2 -x BDGP6 -U SRR072893.fastq -S output
+samtools view -b output > output.bam
+samtools sort output.bam output_sorted
+samtools index output_sorted.bam
+stringtie output_sorted.bam -p 3 -G BDGP6.Ensembl.81.gtf -o output_string -e -B
