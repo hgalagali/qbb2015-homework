@@ -31,7 +31,7 @@ def set_bits_from_file(arrays, fname):
         count+=1
     return count, array_copy 
     
-def two_intersection(arrays1, arrays2, fname):
+def two_intersection(arrays1, arrays2, fname1, fname2):
     num_overlap=0
     for line in open(fname):
         fields = line.split()
@@ -51,12 +51,13 @@ def three_intersection(arrays1, arrays2, arrays3, fname):
         end = int(fields[2])
         sl = arrays1[chrom][start:end] & arrays2[chrom][start:end] & arrays3[chrom][start:end]
         num_overlap += sl.any() 
-    return num_overlap 
+    return num_overlap
 
 arrays = arrays_from_len_file(sys.argv[1])
-count_1, arrays_1 = set_bits_from_file(arrays, sys.argv[2])
-count_2, arrays_2 = set_bits_from_file(arrays, sys.argv[3])
-count_3, arrays_3 = set_bits_from_file(arrays, sys.argv[4])
+count_1, arrays1 = set_bits_from_file(arrays, sys.argv[2])
+count_2, arrays2 = set_bits_from_file(arrays, sys.argv[3])
+count_3, arrays3 = set_bits_from_file(arrays, sys.argv[4])
+            
 count_1_2 = two_intersection(arrays_1, arrays_2, sys.argv[2])
 count_1_3 = two_intersection(arrays_1, arrays_3, sys.argv[2])
 count_2_3 = two_intersection(arrays_2, arrays_3, sys.argv[4])

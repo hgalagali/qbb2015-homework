@@ -48,6 +48,7 @@ class ChromosomeLocationBitArrays(object):
         
     def make_tuples(self):
         tuple_list=[]
+        number=0
         for chrom, value in self.arrays.iteritems():
             for i in range(0, len(value)-1, 1):
                 if value[i]==0 and value[i+1]==1:
@@ -55,6 +56,11 @@ class ChromosomeLocationBitArrays(object):
                 if value[i]==1 and value[i+1]==0:
                     stop=i
                     tuple_list.append((chrom, start, stop))
+                    
+            if value[i]==1:
+                stop=i
+                tuple_list.append((chrom, start, stop))
+               
         return tuple_list
                 
         
